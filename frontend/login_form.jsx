@@ -7,12 +7,14 @@ class LoginForm extends React.Component{
     this.state = {
       username: "",
       password: "",
-      validation: ""
+      userNameValidation: "",
+      passwordValidation: ""
     }
     this.handleUserName = this.handleUserName.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleValidation = this.handleValidation.bind(this);
   }
 
   handleUserName(e) {
@@ -23,20 +25,35 @@ class LoginForm extends React.Component{
     this.setState({password: e.target.value});
   }
 
-
-
-  handleSignup() {
+  handleValidation(){
     const username = this.state.username;
     const password = this.state.password;
-    if(username.length < 4){
-      
+
+    if(username === ""){
+        this.setState({ userNameValidation: "*This is a required field for submission" });
+    } else if(username.length < 4){
+        this.setState({ userNameValidation: "Your username must have a minimum length of 4 characters" });
     } else if (!isAlphaNumeric(username)){
-      this.setState({validation: "Your username must only include letters and numbers"})
+        this.setState({ userNameValidation: "Your username must only include letters and numbers" });
+    } else {
+        this.setState({ userNameValidation: "" });
+    }
+
+    if(password === ""){
+      this.setState({ passwordValidation: "*This is a required field for submission" });
+    } else if(password.length < 4){
+      this.setState({ passwordValidation: "Your password must have a minimum length of 4 characters" });
+    } else {
+      this.setState({ passwordValidation: "" });
     }
   }
 
-  handleLogin() {
+  handleSignup() {
+    this.handleValidation();
+  }
 
+  handleLogin() {
+    this.handleValidation();
   }
 
 
@@ -47,11 +64,12 @@ class LoginForm extends React.Component{
         <div>
           <label>User Name</label>
           <input type="text" onChange={this.handleUserName} value={this.state.username}></input>
-          <div>{this.state.validation}</div>
+          <div>{this.state.userNameValidation}</div>
         </div>
         <div>
           <label>Password</label>
           <input type="password" onChange={this.handlePassword} value={this.state.password} ></input>
+          <div>{this.state.passwordValidation}</div>
         </div>
         <div>
           <button onClick={this.handleSignup}>Signup</button>
