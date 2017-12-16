@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Root from './root';
+import configureStore from './store';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
-  ReactDOM.render(<h1>Lego my Eggo</h1>, root);
-})
+  const store = configureStore();
+  ReactDOM.render(<Root store={store} />, root);
+});
