@@ -28,32 +28,47 @@ class LoginForm extends React.Component{
   handleValidation(){
     const username = this.state.username;
     const password = this.state.password;
+    let validUserName = false;
+    let validPassword = false;
 
     if(username === ""){
         this.setState({ userNameValidation: "*This is a required field for submission" });
-    } else if(username.length < 4){
+    } else if( username.length < 4 ){
         this.setState({ userNameValidation: "Your username must have a minimum length of 4 characters" });
-    } else if (!isAlphaNumeric(username)){
+
+    } else if ( username.length > 20 ){
+        this.setState({ userNameValidation: "Your username cannot have a length greater than 20 characters" });
+    } else if ( !isAlphaNumeric(username) ){
         this.setState({ userNameValidation: "Your username must only include letters and numbers" });
     } else {
         this.setState({ userNameValidation: "" });
+        validUserName = true;
     }
 
     if(password === ""){
-      this.setState({ passwordValidation: "*This is a required field for submission" });
-    } else if(password.length < 4){
-      this.setState({ passwordValidation: "Your password must have a minimum length of 4 characters" });
+        this.setState({ passwordValidation: "*This is a required field for submission" });
+    } else if( password.length < 4 ){
+        this.setState({ passwordValidation: "Your password must have a minimum length of 4 characters" });
+    } else if ( password.length > 20 ){
+        this.setState({ passwordValidation: "Your password cannot have a length greater than 20 characters" });
     } else {
-      this.setState({ passwordValidation: "" });
+        this.setState({ passwordValidation: "" });
+        validPassword = true;
     }
+
+    return validUserName && validPassword;
   }
 
   handleSignup() {
-    this.handleValidation();
+    if(this.handleValidation()){
+      this.props.signup({username: this.state.username, password: this.state.password});
+    }
   }
 
   handleLogin() {
-    this.handleValidation();
+    if(this.handleValidation()){
+      this.props.login({username: this.state.username, password: this.state.password});
+    }
   }
 
 

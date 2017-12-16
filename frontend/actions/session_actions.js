@@ -6,3 +6,23 @@ export const receiveCurrentUser = (user) => {
     currentUser: user
   }
 }
+
+export const signup = (user) => (dispatch) => {
+  return $.ajax({
+    method: 'POST',
+    url: '/users',
+    data: {user: user}
+  }).then((user) => {
+    dispatch(receiveCurrentUser(user));
+  });
+}
+
+export const login = (user) => (dispatch) => {
+  return $.ajax({
+    method: 'POST',
+    url: '/session',
+    data: {user: user}
+  }).then((user) => {
+    dispatch(receiveCurrentUser(user));
+  })
+}

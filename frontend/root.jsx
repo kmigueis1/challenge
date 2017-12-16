@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import LoginForm from './login_form';
+import LoginFormContainer from './login_form_container';
 
 const Root = ({store}) => {
   return (
     <Provider store={store}>
-      <LoginForm/>
+      <LoginFormContainer />
     </Provider>
   );
 }
