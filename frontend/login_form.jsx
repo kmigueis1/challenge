@@ -92,25 +92,23 @@ class LoginForm extends React.Component{
     const rendered = (currentUser && currentUser.Status === 1) ? (
       <div>{welcomeMessage}</div>
       ) : (
-      <div>
-        <div>
-          <label>Name (optional)</label>
-          <input type="text" onChange={this.handleName} value={this.state.name}></input>
+      <div className="login-form">
+        <div className="logo"><img src="../app/assets/images/youvisit_logo.png"></img></div>
+        <div className="name input">
+          <input type="text" placeholder="Name (optional)" onChange={this.handleName} value={this.state.name}></input>
+        </div>
+        <div className="username input">
+          <input type="text" placeholder="Username" onChange={this.handleUserName} value={this.state.username}></input>
+          <div className="validation">{this.state.userNameValidation}</div>
+        </div>
+        <div className="password input">
+          <input type="password" placeholder="Password" onChange={this.handlePassword} value={this.state.password} ></input>
+          <div className="validation">{this.state.passwordValidation}</div>
         </div>
         <div>
-          <label>User Name</label>
-          <input type="text" onChange={this.handleUserName} value={this.state.username}></input>
-          <div>{this.state.userNameValidation}</div>
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" onChange={this.handlePassword} value={this.state.password} ></input>
-          <div>{this.state.passwordValidation}</div>
-        </div>
-        <div>
-          <div>{errors}</div>
-          <button onClick={this.handleSignup}>Signup</button>
-          <button onClick={this.handleLogin}>Login</button>
+          <div className="form-errors">{errors}</div>
+          <button className="signup button" onClick={this.handleSignup}>Signup</button>
+          <button className="login button" onClick={this.handleLogin}>Login</button>
         </div>
       </div>
     );

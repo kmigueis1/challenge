@@ -1,0 +1,47 @@
+.login-form{
+  width: 400px;
+  margin: 0 auto;
+  .logo{
+    height: 100px;
+    width: 400px;
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .input{
+
+    input{
+      height: 30px;
+      width: 100%;
+      font-size: 15px;
+      border: 1px solid lightgray;
+      border-radius: 4px;
+      margin: 10px 0;
+      padding: 10px 15px;
+    }
+  }
+
+  .button {
+    width: 100px;
+    height: 35px;
+    color: white;
+    font-size: 15px;
+    margin: 10px 15px 0 0px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .signup {
+    background: #008489;
+  }
+
+  .login {
+    background: #FF5A5F;
+  }
+
+
+}
