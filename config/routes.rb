@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :show]
   resource :session, only: [:create, :destroy]
+
+  #I am using restful routes for the backend API
 end

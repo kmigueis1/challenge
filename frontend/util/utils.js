@@ -1,5 +1,7 @@
 export const isAlphaNumeric = (username) => {
 
+  //I use ASCII code to determine if any particular character is alphanumeric, which would
+  //mean its ASCII code would lie in any one of three number ranges according to the ASCII table
   function isNumeric(letter){
     if(letter.charCodeAt(0) > 47 && letter.charCodeAt(0) < 58) return true;
     return false;

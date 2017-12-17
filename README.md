@@ -1,24 +1,5 @@
-# README
+#challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To setup the rails project after cloning onto your machine, run 'bundle install' in terminal to install ruby gems.
+Once done, run 'npm install' to install all node packages.
+Run 'rails s' to open rails server. Open a browser and paste 'localhost:3000' into the top bar to load the project.
