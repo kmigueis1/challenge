@@ -4,7 +4,7 @@ import LoginForm from './login_form';
 
 const mapStateToProps = (state) => {
   return {
-    signedIn: !!state.session.currentUser
+    currentUser: state.session.currentUser
   };
 }
 

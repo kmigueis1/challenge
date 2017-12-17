@@ -79,8 +79,19 @@ class LoginForm extends React.Component{
 
 
   render(){
-
-    return(
+    const currentUser = this.props.currentUser;
+    let welcomeMessage;
+    if (currentUser){
+      welcomeMessage = (currentUser.Name === "") ?
+      (`Welcome ${currentUser.Username}!, User Id: ${currentUser.Userid}`) :
+      (`Welcome ${currentUser.Name} (${currentUser.Username})!, User Id: ${currentUser.Userid}`);
+    }
+    const errors = (currentUser && currentUser.Status === -1) ? (
+      currentUser.Message
+    ) : ("");
+    const rendered = (currentUser && currentUser.Status === 1) ? (
+      <div>{welcomeMessage}</div>
+      ) : (
       <div>
         <div>
           <label>Name (optional)</label>
@@ -97,9 +108,16 @@ class LoginForm extends React.Component{
           <div>{this.state.passwordValidation}</div>
         </div>
         <div>
+          <div>{errors}</div>
           <button onClick={this.handleSignup}>Signup</button>
           <button onClick={this.handleLogin}>Login</button>
         </div>
+      </div>
+    );
+
+    return(
+      <div>
+        {rendered}
       </div>
     )
   }
