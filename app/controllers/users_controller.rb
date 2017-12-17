@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
-    if @user.save
+    existingUser = User.find_by(user_name: params[:user][:user_name]);
+    if (!existingUser && @user.save)
       login(@user)
       render :show
     else
-      render json: ['Invalid inputs'], status: 422
+      @message = "Username already exists"
+      render :error
     end
   end
 

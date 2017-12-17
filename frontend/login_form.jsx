@@ -7,6 +7,7 @@ class LoginForm extends React.Component{
     this.state = {
       username: "",
       password: "",
+      name: "",
       userNameValidation: "",
       passwordValidation: ""
     }
@@ -15,6 +16,7 @@ class LoginForm extends React.Component{
     this.handleSignup = this.handleSignup.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
+    this.handleName = this.handleName.bind(this);
   }
 
   handleUserName(e) {
@@ -23,6 +25,10 @@ class LoginForm extends React.Component{
 
   handlePassword(e) {
     this.setState({password: e.target.value});
+  }
+
+  handleName(e) {
+    this.setState({name: e.target.value});
   }
 
   handleValidation(){
@@ -61,13 +67,13 @@ class LoginForm extends React.Component{
 
   handleSignup() {
     if(this.handleValidation()){
-      this.props.signup({username: this.state.username, password: this.state.password});
+      this.props.signup({name: this.state.name, user_name: this.state.username, password: this.state.password});
     }
   }
 
   handleLogin() {
     if(this.handleValidation()){
-      this.props.login({username: this.state.username, password: this.state.password});
+      this.props.login({name: this.state.name, user_name: this.state.username, password: this.state.password});
     }
   }
 
@@ -76,6 +82,10 @@ class LoginForm extends React.Component{
 
     return(
       <div>
+        <div>
+          <label>Name (optional)</label>
+          <input type="text" onChange={this.handleName} value={this.state.name}></input>
+        </div>
         <div>
           <label>User Name</label>
           <input type="text" onChange={this.handleUserName} value={this.state.username}></input>

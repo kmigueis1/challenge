@@ -4,9 +4,10 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(params[:user][:user_name], params[:user][:password])
     if @user
       login(@user)
-      render 'users/show'
+      render 'users/login'
     else
-      render json: ["The username/password combination is incorrect"], status: 401
+      @message = "Invalid username or password"
+      render 'users/error'
     end
   end
 
