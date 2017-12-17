@@ -83,17 +83,20 @@ class LoginForm extends React.Component{
     let welcomeMessage;
     if (currentUser){
       welcomeMessage = (currentUser.Name === "") ?
-      (`Welcome ${currentUser.Username}!, User Id: ${currentUser.Userid}`) :
-      (`Welcome ${currentUser.Name} (${currentUser.Username})!, User Id: ${currentUser.Userid}`);
+      (`Welcome ${currentUser.Username}! User Id: ${currentUser.Userid}`) :
+      (`Welcome ${currentUser.Name} (${currentUser.Username})! User Id: ${currentUser.Userid}`);
     }
     const errors = (currentUser && currentUser.Status === -1) ? (
       currentUser.Message
     ) : ("");
     const rendered = (currentUser && currentUser.Status === 1) ? (
-      <div>{welcomeMessage}</div>
+      <div className="welcome-container">
+        <div className="logo welcome-logo"><img src="https://raw.githubusercontent.com/kmigueis1/challenge/master/app/assets/images/youvisit_logo.png"></img></div>
+        <div className="welcome">{welcomeMessage}</div>
+      </div>
       ) : (
       <div className="login-form">
-        <div className="logo"><img src="../app/assets/images/youvisit_logo.png"></img></div>
+        <div className="logo"><img src="https://raw.githubusercontent.com/kmigueis1/challenge/master/app/assets/images/youvisit_logo.png"></img></div>
         <div className="name input">
           <input type="text" placeholder="Name (optional)" onChange={this.handleName} value={this.state.name}></input>
         </div>
@@ -106,7 +109,7 @@ class LoginForm extends React.Component{
           <div className="validation">{this.state.passwordValidation}</div>
         </div>
         <div>
-          <div className="form-errors">{errors}</div>
+          <div className="form-errors validation">{errors}</div>
           <button className="signup button" onClick={this.handleSignup}>Signup</button>
           <button className="login button" onClick={this.handleLogin}>Login</button>
         </div>
