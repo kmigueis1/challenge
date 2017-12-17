@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
-import { signup, login, resetCurrentUser } from './actions/session_actions';
+import { signup, login } from './actions/session_actions';
+import { resetErrors } from './actions/error_actions';
 import LoginForm from './login_form';
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    errors: state.errors.sessionErrors
   };
 }
 
@@ -14,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signup: (user) => dispatch(signup(user)),
     login: (user) => dispatch(login(user)),
-    resetCurrentUser: () => dispatch(resetCurrentUser())
+    resetErrors: () => dispatch(resetErrors())
   }
 
 }

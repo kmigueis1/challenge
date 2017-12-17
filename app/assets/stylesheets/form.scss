@@ -1,12 +1,14 @@
 .login-form{
   width: 400px;
   margin: 0 auto;
+  font-family: sans-serif;
 
   .validation{
     color: red;
     height: 15px;
-    font-size: 12px;
+    font-size: 13px;
   }
+  
   .input{
 
     input{

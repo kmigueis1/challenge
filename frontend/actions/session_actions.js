@@ -1,16 +1,10 @@
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+import { receiveErrors } from './error_actions';
 
 export const receiveCurrentUser = (user) => {
   return {
     type: RECEIVE_CURRENT_USER,
     currentUser: user
-  }
-}
-
-export const resetCurrentUser = () => {
-  return {
-    type: RECEIVE_CURRENT_USER,
-    currentUser: null
   }
 }
 
@@ -22,7 +16,13 @@ export const signup = (user) => (dispatch) => {
     url: '/users',
     data: {user: user}
   }).then((user) => {
+    if (user.Status === 1){
+      console.log("success!")
     dispatch(receiveCurrentUser(user));
+    } else {
+      console.log("no success")
+      dispatch(receiveErrors(user));
+    }
   });
 }
 
@@ -47,6 +47,13 @@ export const login = (user) => (dispatch) => {
     url: '/session',
     data: {user: user}
   }).then((user) => {
+
+    //keeping separation of concerns in mind, I am updating the state with either a current user or an error
+    //depending on whether a sucess or failure status was received and I am storing them as two different slices of state
+    if (user.Status === 1){
     dispatch(receiveCurrentUser(user));
+    }else {
+      dispatch(receiveErrors(user));
+    }
   })
 }

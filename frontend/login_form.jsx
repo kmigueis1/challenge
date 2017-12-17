@@ -88,8 +88,8 @@ class LoginForm extends React.Component{
   handleSignup() {
     //validation logic is pulled into its own method handleValidation since it needs to be reused for both
     //signup and login handlers.
-    this.props.resetCurrentUser();
-    //I reset the currentUser so the errors from the API are no longer rendered when the user tries
+    this.props.resetErrors();
+    //I reset the errors so the errors from the API are no longer rendered when the user tries
     //clicking one of the submission buttons again - only the relevant validation messages will render.
     if(this.handleValidation()){
       this.props.signup({name: this.state.name, user_name: this.state.username, password: this.state.password});
@@ -100,11 +100,15 @@ class LoginForm extends React.Component{
     //signup and login functions are sent to the component as a prop from its container component which is
     //connected to the redux store
 
+    //upon signup or login, if an error status (negative number) is received as JSON from the API, the ajax promise
+    //will resolve by updating a separate slice of state with the error instead of updating the current user.
+    //This will satisfy separation of concerns.
+
 
   }
 
   handleLogin() {
-    this.props.resetCurrentUser();
+    this.props.resetErrors();
     if(this.handleValidation()){
       this.props.login({name: this.state.name, user_name: this.state.username, password: this.state.password});
     }
@@ -121,8 +125,8 @@ class LoginForm extends React.Component{
       //the type of welcome message is determined here depending if the user's name has been specified
       //since it is an optional field and can be persisted to the database as an empty string.
     }
-    const errors = (currentUser && currentUser.Status === -1) ? (
-      currentUser.Message
+    const errors = (this.props.errors && this.props.errors.Status === -1) ? (
+      this.props.errors.Message
       //if the status returned from the API is negative -1, errors will be assigned to the error message
       //sent in the JSON. Otherwise it will be an empty string and won't be visible on the form.
     ) : ("");
